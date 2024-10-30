@@ -21,7 +21,7 @@ const FormWithCondition = () => {
       const obj = {
         type: POST_TYPE.SPECIALIZED.toString(),
       };
-      return obj;``
+      return obj;
     }, []),
   });
 
