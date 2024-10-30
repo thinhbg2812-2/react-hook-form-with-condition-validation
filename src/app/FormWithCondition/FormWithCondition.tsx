@@ -1,9 +1,10 @@
 "use client";
 import { FormFieldInput } from "@/components/custom/FormFieldInput";
 import FormFieldSelect from "@/components/custom/FormFieldSelect";
+import Input from "@/components/Input";
 import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import {
   createEditFormSchema,
@@ -18,7 +19,6 @@ const FormWithCondition = () => {
     resolver: zodResolver(createEditFormSchema),
     defaultValues: useMemo(() => {
       const obj = {
-        quantity: 1,
         type: POST_TYPE.SPECIALIZED.toString(),
       };
       return obj;
@@ -30,18 +30,19 @@ const FormWithCondition = () => {
     formState: { errors },
     watch,
   } = method;
-  console.log("🚀 ~ FormWithCondition ~ errors:", errors);
   const typeValue = watch("type");
+  console.log("🚀 ~ FormWithCondition ~ errors:", errors);
 
+  const [submitSuccess, setSubmitSuccess] = useState(0);
   const onSubmit = (data: unknown) => {
-    console.log("🚀 ~ onSubmit ~ data:", data);
+    setSubmitSuccess(submitSuccess + 1);
     return {};
   };
 
   return (
-    <div>
-      <Button onClick={() => handleSubmit(onSubmit)()}>Đăng tin</Button>
-
+    <div className="space-y-3">
+      <Input />
+      <Button onClick={() => handleSubmit(onSubmit)()}>SUBMIT FORM</Button>
       <FormProvider {...method}>
         <PostKind />
 
@@ -50,12 +51,12 @@ const FormWithCondition = () => {
             <FormFieldInput
               fieldTitle={
                 <div>
-                  Vị trí tuyển dụng <span className="text-red-400">*</span>
+                  Specialist <span className="text-red-400">*</span>
                 </div>
               }
               nameInSchema="jobOpening"
               id="jobOpening"
-              placeholder="Vị trí tuyển dụng"
+              placeholder="Specialist"
             />
           </div>
         )}
@@ -65,11 +66,11 @@ const FormWithCondition = () => {
               options={JOB_TITLE_OPTIONS}
               fieldTitle={
                 <div>
-                  Cấp bậc <span className="text-red-400">*</span>
+                  JobTitle <span className="text-red-400">*</span>
                 </div>
               }
               nameInSchema="jobTitle"
-              placeholder="Cấp bậc"
+              placeholder=""
             />
           </div>
         )}
@@ -77,14 +78,15 @@ const FormWithCondition = () => {
         <FormFieldInput
           fieldTitle={
             <div>
-              Kinh nghiệm <span className="text-red-400">*</span>
+              EXP <span className="text-red-400">*</span>
             </div>
           }
           nameInSchema="experience"
           id="experience"
-          placeholder="Kinh nghiệm"
+          placeholder="EXP"
         />
       </FormProvider>
+      Submit Count: {submitSuccess}
     </div>
   );
 };

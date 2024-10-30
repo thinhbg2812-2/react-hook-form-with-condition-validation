@@ -6,7 +6,19 @@ import { useFormContext } from "react-hook-form";
 import { POST_TYPE } from "./createEdit.type";
 
 const PostKind = () => {
-  const { control } = useFormContext();
+  const { control, setValue } = useFormContext();
+
+  // const onChange = (value: string) => {
+  //   if (value === POST_TYPE.SPECIALIZED.toString()) {
+  //     setValue("type", value);
+  //     setValue("jobOpening", "");
+  //     setValue("jobTitle", "");
+  //   } else {
+  //     setValue("type", value);
+  //     setValue("jobOpening", "");
+  //     setValue("jobTitle", "");
+  //   }
+  // };
 
   return (
     <div>
@@ -35,7 +47,7 @@ const PostKind = () => {
                     id="option-one"
                     className="text-primary"
                   />
-                  Việc làm chuyên môn
+                  SPECIALIZED
                 </Label>
 
                 <Label
@@ -52,7 +64,7 @@ const PostKind = () => {
                     id="option-two"
                     className="text-primary"
                   />
-                  Việc làm phổ thông
+                  GENERAL
                 </Label>
               </RadioGroup>
             </FormControl>
