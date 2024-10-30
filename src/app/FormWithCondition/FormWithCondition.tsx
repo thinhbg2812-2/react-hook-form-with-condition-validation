@@ -6,17 +6,14 @@ import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMemo, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import {
-  createEditFormSchema,
-  CreateEditPostForm,
-  POST_TYPE,
-} from "./createEdit.type";
+
+import { Final01, FinalSchema01, POST_TYPE } from "./createEdit.type";
 import { JOB_TITLE_OPTIONS } from "./options";
 import PostKind from "./PostKind";
 
 const FormWithCondition = () => {
-  const method = useForm<CreateEditPostForm>({
-    resolver: zodResolver(createEditFormSchema),
+  const method = useForm<Final01>({
+    resolver: zodResolver(FinalSchema01),
     defaultValues: useMemo(() => {
       const obj = {
         type: POST_TYPE.SPECIALIZED.toString(),
@@ -32,8 +29,9 @@ const FormWithCondition = () => {
   } = method;
   const typeValue = watch("type");
   console.log("🚀 ~ FormWithCondition ~ errors:", errors);
-  const a = "";
   const [submitSuccess, setSubmitSuccess] = useState(0);
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const onSubmit = (data: unknown) => {
     setSubmitSuccess(submitSuccess + 1);
     return {};
