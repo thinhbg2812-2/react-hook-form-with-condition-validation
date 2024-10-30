@@ -32,7 +32,7 @@ const FormWithCondition = () => {
   } = method;
   const typeValue = watch("type");
   console.log("🚀 ~ FormWithCondition ~ errors:", errors);
-  const a = "";
+  const a1 = "";
   const [submitSuccess, setSubmitSuccess] = useState(0);
   const onSubmit = (data: unknown) => {
     setSubmitSuccess(submitSuccess + 1);
